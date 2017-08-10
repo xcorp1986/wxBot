@@ -4,6 +4,9 @@
 
 from datetime import datetime
 from wxbot import *
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 
 class MyWXBot(WXBot):
