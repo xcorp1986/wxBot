@@ -8,8 +8,13 @@ from wxbot import *
 
 class MyWXBot(WXBot):
     def schedule(self):
-        self.send_msg(u'欢乐今宵', u'OK~~~%s' %datetime.now())
-        time.sleep(600)
+        hour = datetime.now().hour
+        minute = datetime.now().minute
+        if 9 <= hour <= 23:
+            if minute % 10 == 0:
+                self.send_msg(u'欢乐今宵', u'OK~~~%s' %datetime.now())
+
+        time.sleep(10)
 
 
 def main():
