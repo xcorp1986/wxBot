@@ -14,7 +14,7 @@ class MyWXBot(WXBot):
             if minute % 10 == 0:
                 self.send_msg(u'欢乐今宵', u'OK~~~%s' %datetime.now())
 
-        time.sleep(10)
+        time.sleep(61)
 
 
 def main():
