@@ -2,28 +2,25 @@
 # coding: utf-8
 #
 
-from wxbot import *
+from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.triggers.cron import CronTrigger
+from datetime import datetime
 
 
-class MyWXBot(WXBot):
-    def handle_msg_all(self, msg):
-        if msg['msg_type_id'] == 4 and msg['content']['type'] == 0:
-            self.send_msg_by_uid(u'hi', msg['user']['id'])
-            #self.send_img_msg_by_uid("img/1.png", msg['user']['id'])
-            #self.send_file_msg_by_uid("img/1.png", msg['user']['id'])
-'''
-    def schedule(self):
-        self.send_msg(u'张三', u'测试')
-        time.sleep(1)
-'''
-
-
-def main():
-    bot = MyWXBot()
-    bot.DEBUG = True
-    bot.conf['qr'] = 'png'
-    bot.run()
+def my_job():
+    print 'task running at %s' % datetime.now()
+    job = sched.get_job("my_task")
+    hour = datetime.now().hour
+    if 9 <= hour <= 23:
+        if str(job.trigger) != str(CronTrigger(minute='*/1', second='00')):
+            sched.reschedule_job(job.id, trigger='cron', minute='*/1', second='00')
 
 
 if __name__ == '__main__':
-    main()
+    print 'Program Starting @time:%s' % datetime.now()
+    sched = BlockingScheduler()
+    hour = datetime.now().hour
+    if 9 <= hour <= 23:
+        sched.add_job(my_job,'cron',minute='*/1', second='00', id='my_task')
+    sched.start()
+

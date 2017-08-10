@@ -2,3 +2,4 @@ requests
 pyqrcode
 pypng
 Pillow
+apscheduler
