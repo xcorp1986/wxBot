@@ -12,7 +12,7 @@ class MyWXBot(WXBot):
         minute = datetime.now().minute
         if 9 <= hour <= 23:
             if minute % 10 == 0:
-                self.send_msg(u'欢乐今宵', u'OK~~~%s' %datetime.now())
+                self.send_msg(u'欢乐今宵', u'OK~~~%s' % datetime.now())
 
         time.sleep(61)
 
